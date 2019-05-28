@@ -421,7 +421,7 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`studentNo`, `regNo`, `fName`, `lName`, `program`, `gender`, `DOB`, `yearOfEntry`, `nationality`, `contact`, `email`, `course_id`, `userID`) VALUES
 (21201672, '14/U/877', ' Jane ', 'MBABAZI ', 'Day', 'F', '0000-00-00', '2014-2015', 'Uganda', '+257701562348', 'jane@yahoo.com', 3, 1139),
-(211004594, '16/KUD/DICSIT/027/HP', 'Benard', 'Libo', 'Day', 'M', '1992-05-23', '2014-2015', 'Uganda', '+256771235987', 'philip@gamail.com', 3, 1064),
+(211004594, '16/KUD/DCSIT/027HP', 'Benard', 'Libo', 'Day', 'M', '1992-05-23', '2014-2015', 'Uganda', '+256771235987', 'philip@gamail.com', 1, 1064),
 (211012908, '14/U/11843/EVE', ' Peter Faaro ', 'MANGENI ', 'Evenning', 'M', '1995-09-15', '2014-2015', 'Uganda', '+256789362548', 'mangeni@gmail.com', 3, 1136),
 (211013934, '14/U/11855/EVE', '  Wilson ', 'MATATA', 'Evenning', 'M', '0000-00-00', '2014-2015', 'Uganda', '+256789145623', 'wilson@yahoo.com', 3, 1137),
 (211025823, '11/U/24033/PS', ' SHADIAH KASULE', 'NANTABA', 'Day', 'F', '1995-09-15', '2011-2012', 'Uganda', '+256703020951', 'kasuleshadiah@gmail.com', 1, 107),
@@ -753,7 +753,7 @@ INSERT INTO `users` (`userID`, `username`, `password`, `profilepic`, `usertype`,
 (1061, '14/U/337', '1bb72f8c1e1ccd4a583da4c58ff5cf7b', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
 (1062, '14/X/22308/PS', 'c1672be24ede5c45df14599ac4abee0e', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
 (1063, '14/U/7058/EVE', '000cd2048c47c5089bb7608cb494859c', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
-(1064, '16/KUD/DICSIT/027/HP', '5a2b6d3b54f2b1966f529546bae7e824', '', 'student', '2019-05-28 07:13:32', 'b59c67bf196a4758191e42f76670ceba'),
+(1064, '16/KUD/DCSIT/027HP', '5a2b6d3b54f2b1966f529546bae7e824', '', 'student', '2019-05-28 07:13:32', 'b59c67bf196a4758191e42f76670ceba'),
 (1065, '14/U/7262/PS', '59568972e60c48fe3b304c1d22ea23b8', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
 (1066, '14/U/7282/EVE', 'd872eb5a817e94ab4002bf7d4b80a655', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
 (1067, '14/U/23285/PS', '1172d85c8e43ed5749cb77afabeb8e5c', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
