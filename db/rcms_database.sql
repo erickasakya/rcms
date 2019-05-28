@@ -1,26 +1,26 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
--- http://www.phpmyadmin.net
+-- version 4.8.0.1
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2017 at 01:57 PM
--- Server version: 5.5.32
--- PHP Version: 5.4.16
+-- Generation Time: May 28, 2019 at 09:22 AM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 5.6.36
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `rcms_database`
 --
-CREATE DATABASE IF NOT EXISTS `rcms_database` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `rcms_database`;
 
 -- --------------------------------------------------------
 
@@ -28,28 +28,14 @@ USE `rcms_database`;
 -- Table structure for table `comment`
 --
 
-CREATE TABLE IF NOT EXISTS `comment` (
-  `commentID` int(6) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comment` (
+  `commentID` int(6) NOT NULL,
   `content` varchar(1000) NOT NULL,
   `commentDate` datetime NOT NULL,
   `complaintNo` int(10) NOT NULL,
   `staffID` varchar(12) NOT NULL,
-  `flag` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`commentID`),
-  KEY `complaintNo` (`complaintNo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
-
---
--- Dumping data for table `comment`
---
-
-INSERT INTO `comment` (`commentID`, `content`, `commentDate`, `complaintNo`, `staffID`, `flag`) VALUES
-(1, 'Your coursework mark is missing.\r\nIf you did my coursework please see me in my office tomorrow at 4p', '2017-06-12 13:04:01', 18, '', 0),
-(2, 'Your coursework mark is missing.\r\nIf you did my coursework please see me in my office tomorrow at 4p', '2017-06-12 13:08:56', 18, '', 0),
-(3, 'Your coursework mark is missing.\r\nIf you did my coursework please see me in my office tomorrow at 4p', '2017-06-12 13:12:08', 18, '', 0),
-(5, 'Your registration Number on the test script does not much any in the final exam attendance', '2017-06-05 08:11:23', 11, 'SCIT03', 0),
-(9, 'i didn''t see your test paper', '2017-07-03 17:25:12', 16, 'SCIT02', 0),
-(10, 'have not seen your coursework 1 marks', '2017-07-03 19:19:08', 39, 'SCIT02', 0);
+  `flag` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -57,8 +43,8 @@ INSERT INTO `comment` (`commentID`, `content`, `commentDate`, `complaintNo`, `st
 -- Table structure for table `complaint`
 --
 
-CREATE TABLE IF NOT EXISTS `complaint` (
-  `complaintNo` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `complaint` (
+  `complaintNo` int(10) NOT NULL,
   `complaint_type` varchar(120) NOT NULL,
   `complaintDate` datetime NOT NULL,
   `approvalDate` datetime NOT NULL,
@@ -70,59 +56,14 @@ CREATE TABLE IF NOT EXISTS `complaint` (
   `studentNo` int(9) NOT NULL,
   `lecturerID` varchar(12) NOT NULL,
   `hodID` varchar(12) NOT NULL,
-  `flag` int(2) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`complaintNo`),
-  KEY `studentNo` (`studentNo`),
-  KEY `course_id` (`course_id`),
-  KEY `lecturerID` (`lecturerID`),
-  KEY `hodID` (`hodID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
-
---
--- Dumping data for table `complaint`
---
-
-INSERT INTO `complaint` (`complaintNo`, `complaint_type`, `complaintDate`, `approvalDate`, `approval_status`, `confirmation`, `confirmation_date`, `status`, `course_id`, `studentNo`, `lecturerID`, `hodID`, `flag`) VALUES
-(4, 'Missing exam', '2017-04-30 12:34:08', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'workedon', 32, 214000120, 'SCIT03', 'SCIT01', 1),
-(6, 'Missing coursework', '2017-04-30 14:44:09', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 10, 214000120, 'SCIT19', 'SCIT01', 1),
-(11, 'Missing exam', '2017-05-01 17:27:17', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'commented', 11, 214000120, 'SCIT02', 'SCIT01', 1),
-(15, 'Missing exam', '2017-05-01 17:44:54', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 11, 214000120, 'SCIT02', 'SCIT01', 1),
-(16, 'Missing all', '2017-05-01 20:39:42', '2017-07-03 17:43:22', 'approved', 'updated', '2017-07-03 17:50:39', 'workedon', 11, 214000120, 'SCIT02', 'SCIT01', 1),
-(17, 'Missing exam', '2017-05-01 20:55:16', '2017-06-28 16:46:20', 'approved', 'pending', '0000-00-00 00:00:00', 'workedon', 32, 214000120, 'SCIT03', 'SCIT01', 1),
-(18, 'Missing exam', '2017-05-01 21:02:32', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'commented', 32, 214000120, 'SCIT03', 'SCIT07', 1),
-(19, 'Missing exam', '2017-05-01 21:16:29', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 11, 214000120, 'SCIT02', 'SCIT01', 1),
-(20, 'Missing coursework', '2017-05-02 15:41:16', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 29, 214000120, 'SCIT05', 'SCIT01', 1),
-(21, 'Missing coursework', '2017-06-09 12:27:45', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'commented', 31, 214000120, 'SCIT05', 'SCIT01', 1),
-(23, 'Missing coursework', '2017-06-15 15:16:42', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 7, 214000120, 'SCIT09', 'SCIT01', 1),
-(25, 'Missing coursework', '2017-06-15 15:49:02', '2017-07-12 14:13:25', 'approved', 'updated', '2017-07-13 06:14:40', 'workedon', 36, 214000120, 'SCIT02', 'SCIT01', 1),
-(27, 'Others', '2017-06-16 14:05:41', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'commented', 3, 214000120, 'SCIT04', 'SCIT01', 1),
-(28, 'Missing exam', '2017-06-27 15:52:18', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 31, 214000120, 'SCIT05', 'SCIT01', 1),
-(29, 'Missing coursework', '2017-06-28 15:47:40', '2017-06-28 16:44:14', 'approved', 'updated', '2017-07-02 23:14:09', 'workedon', 31, 214018802, 'SCIT05', 'SCIT01', 1),
-(33, 'Missing exam', '2017-06-30 22:25:42', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 36, 214000120, 'SCIT02', 'SCIT01', 1),
-(34, 'Not contended with the ma', '2017-07-02 19:55:07', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 10, 214000120, 'SCIT19', 'SCIT01', 1),
-(35, 'under marked', '2017-07-03 12:54:52', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 15, 214024647, 'SCIT09', 'SCIT01', 1),
-(36, 'under marked', '2017-07-03 12:56:40', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 15, 214024647, 'SCIT09', 'SCIT01', 1),
-(37, 'Missing all', '2017-07-03 12:59:21', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 18, 214024647, 'SCIT19', 'SCIT01', 1),
-(39, 'Missing all', '2017-07-03 14:33:38', '2017-07-03 19:22:10', 'approved', 'updated', '2017-07-03 19:23:11', 'workedon', 21, 214024647, 'SCIT02', 'SCIT01', 1),
-(41, 'Missing all', '2017-07-03 15:51:53', '2017-07-03 17:35:25', 'approved', 'updated', '2017-07-03 17:48:56', 'workedon', 7, 214024647, 'SCIT09', 'SCIT01', 1),
-(42, 'Not contended with the mark', '2017-07-03 17:04:43', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 36, 214000120, 'SCIT02', 'SCIT01', 1),
-(43, 'Missing exam', '2017-07-03 19:13:28', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 24, 214024647, 'SCIT02', 'SCIT01', 1),
-(44, 'Missing exam', '2017-07-03 19:15:25', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 36, 214024647, 'SCIT02', 'SCIT01', 1),
-(45, 'Missing exam', '2017-07-04 03:30:44', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 10, 214018802, 'SCIT19', 'SCIT01', 1),
-(46, 'Missing coursework', '2017-07-04 03:39:07', '2017-07-05 16:25:52', 'approved', 'pending', '0000-00-00 00:00:00', 'workedon', 21, 214018802, 'SCIT02', 'SCIT01', 1),
-(47, 'Missing coursework', '2017-07-04 09:06:44', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 32, 214018802, 'SCIT35', 'SCIT01', 1),
-(48, 'Missing all', '2017-07-04 10:16:33', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 4, 214018802, 'SCIT02', 'SCIT01', 1),
-(49, 'Missing all', '2017-07-04 10:17:23', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 4, 214018802, 'SCIT02', 'SCIT01', 1),
-(50, 'Not contended with the mark', '2017-07-04 10:20:26', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 4, 214020655, 'SCIT02', 'SCIT01', 1),
-(51, 'Not contended with the mark', '2017-07-04 10:22:09', '0000-00-00 00:00:00', 'pending', 'pending', '0000-00-00 00:00:00', 'pending', 4, 214020655, 'SCIT02', 'SCIT01', 1);
+  `flag` int(2) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Triggers `complaint`
 --
-DROP TRIGGER IF EXISTS `after_complaint_update`;
-DELIMITER //
-CREATE TRIGGER `after_complaint_update` AFTER UPDATE ON `complaint`
- FOR EACH ROW BEGIN
+DELIMITER $$
+CREATE TRIGGER `after_complaint_update` AFTER UPDATE ON `complaint` FOR EACH ROW BEGIN
 
     IF (NEW.approval_status <> OLD.approval_status) THEN        
         INSERT INTO staff_logs
@@ -137,7 +78,7 @@ CREATE TRIGGER `after_complaint_update` AFTER UPDATE ON `complaint`
         staff_id=NEW.hodID;
     END IF;
 END
-//
+$$
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -146,14 +87,12 @@ DELIMITER ;
 -- Table structure for table `course`
 --
 
-CREATE TABLE IF NOT EXISTS `course` (
-  `course_id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `course` (
+  `course_id` int(10) NOT NULL,
   `short_name` varchar(8) NOT NULL,
   `course_name` varchar(50) NOT NULL,
-  `dept_id` int(6) NOT NULL,
-  PRIMARY KEY (`course_id`),
-  KEY `dept_id` (`dept_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `dept_id` int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `course`
@@ -171,16 +110,14 @@ INSERT INTO `course` (`course_id`, `short_name`, `course_name`, `dept_id`) VALUE
 -- Table structure for table `courseunit`
 --
 
-CREATE TABLE IF NOT EXISTS `courseunit` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `courseunit` (
+  `id` int(10) NOT NULL,
   `course_code` varchar(10) NOT NULL,
   `courseunitName` varchar(55) NOT NULL,
   `semester` varchar(12) NOT NULL,
   `yearofstudy` varchar(10) NOT NULL,
-  `dept_ID` int(6) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `dept_ID` (`dept_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=197 ;
+  `dept_ID` int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `courseunit`
@@ -306,11 +243,10 @@ INSERT INTO `courseunit` (`id`, `course_code`, `courseunitName`, `semester`, `ye
 -- Table structure for table `department`
 --
 
-CREATE TABLE IF NOT EXISTS `department` (
-  `dept_ID` int(6) NOT NULL AUTO_INCREMENT,
-  `dept_name` varchar(55) NOT NULL,
-  PRIMARY KEY (`dept_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+CREATE TABLE `department` (
+  `dept_ID` int(6) NOT NULL,
+  `dept_name` varchar(55) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `department`
@@ -328,48 +264,24 @@ INSERT INTO `department` (`dept_ID`, `dept_name`) VALUES
 -- Table structure for table `mark`
 --
 
-CREATE TABLE IF NOT EXISTS `mark` (
-  `markID` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `mark` (
+  `markID` int(10) NOT NULL,
   `markName` varchar(25) NOT NULL,
   `mark` int(3) NOT NULL,
   `entryDate` datetime NOT NULL,
   `complaintNo` int(10) NOT NULL,
-  `staffID` varchar(12) NOT NULL,
-  PRIMARY KEY (`markID`),
-  KEY `complaintNo` (`complaintNo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
-
---
--- Dumping data for table `mark`
---
-
-INSERT INTO `mark` (`markID`, `markName`, `mark`, `entryDate`, `complaintNo`, `staffID`) VALUES
-(1, 'Coursework', 99, '2017-06-16 06:11:27', 25, 'SCIT02'),
-(2, 'Exam', 90, '2017-06-28 13:00:24', 17, ''),
-(3, 'coursework', 96, '2017-06-28 15:52:30', 29, ''),
-(4, 'Exam', 98, '2017-07-03 15:32:32', 4, 'SCIT03'),
-(5, 'coursework', 80, '2017-07-03 16:05:40', 41, 'SCIT09'),
-(6, 'Exam', 98, '2017-07-03 16:05:40', 41, 'SCIT09'),
-(7, 'coursework', 76, '2017-07-03 17:29:55', 16, 'SCIT02'),
-(8, 'exam', 86, '2017-07-03 17:29:55', 16, 'SCIT02'),
-(9, 'coursework', 80, '2017-07-03 19:20:51', 39, 'SCIT02'),
-(10, 'exam', 97, '2017-07-03 19:20:51', 39, 'SCIT02'),
-(11, 'coursework', 90, '2017-07-04 03:51:52', 46, 'SCIT02'),
-(12, 'coursework', 80, '2017-07-04 09:10:03', 47, 'SCIT35'),
-(13, 'coursework', 79, '2017-07-04 10:35:41', 49, 'SCIT02'),
-(14, 'exam', 97, '2017-07-04 10:35:41', 49, 'SCIT02');
+  `staffID` varchar(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Triggers `mark`
 --
-DROP TRIGGER IF EXISTS `after_mark_insert`;
-DELIMITER //
-CREATE TRIGGER `after_mark_insert` AFTER INSERT ON `mark`
- FOR EACH ROW BEGIN
+DELIMITER $$
+CREATE TRIGGER `after_mark_insert` AFTER INSERT ON `mark` FOR EACH ROW BEGIN
 INSERT INTO staff_logs(mark_id,mark_name,new_mark,operation_type,operation_date,complaint_no,staff_id)
 VALUES(NEW.markID,NEW.markName,NEW.mark,'Giving a Mark',now(),NEW.complaintNo,NEW.staffID);
     END
-//
+$$
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -378,172 +290,14 @@ DELIMITER ;
 -- Table structure for table `notification`
 --
 
-CREATE TABLE IF NOT EXISTS `notification` (
-  `notificationID` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `notification` (
+  `notificationID` int(10) NOT NULL,
   `content` varchar(500) NOT NULL,
   `notificationDate` datetime NOT NULL,
   `studentNo` int(9) DEFAULT NULL,
   `staffID` varchar(12) DEFAULT NULL,
-  `flag` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`notificationID`),
-  KEY `notification_ibfk_1` (`studentNo`),
-  KEY `notification_ibfk_2` (`staffID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=158 ;
-
---
--- Dumping data for table `notification`
---
-
-INSERT INTO `notification` (`notificationID`, `content`, `notificationDate`, `studentNo`, `staffID`, `flag`) VALUES
-(7, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is ', '2017-05-01 17:37:38', 214000120, NULL, 0),
-(8, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught i', '2017-05-01 17:37:44', NULL, 'SCIT02', 0),
-(9, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is ', '2017-05-01 17:44:54', 214000120, NULL, 0),
-(10, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught i', '2017-05-01 17:44:59', NULL, 'SCIT02', 0),
-(11, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-05-01 20:39:42', 214000120, NULL, 0),
-(12, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught in academic year <strong>2014-2015</strong>', '2017-05-01 20:39:50', NULL, 'SCIT02', 0),
-(13, 'Your student with student No<strong> 214000120</strong> has complained about a course unit taught by lecturer<strong> Flavia Namagembe</strong>', '2017-05-01 20:39:56', NULL, 'SCIT01', 0),
-(14, 'Your complaint to lecturer<strong> Innocent Ndibatya</strong> has been received. Thanks, response is soon coming.', '2017-05-01 20:55:16', 214000120, NULL, 0),
-(15, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught in academic year <strong>2014-2015</strong>', '2017-05-01 20:55:22', NULL, 'SCIT03', 0),
-(16, 'Your student with student No<strong> 214000120</strong> has complained about a course unit taught by lecturer<strong> Innocent Ndibatya</strong>', '2017-05-01 20:55:28', NULL, 'SCIT01', 0),
-(17, 'Your complaint to lecturer<strong> Innocent Ndibatya</strong> has been received. Thanks, response is soon coming.', '2017-05-01 21:02:32', 214000120, NULL, 0),
-(18, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught in academic year <strong>2014-2015</strong>', '2017-05-01 21:02:39', NULL, 'SCIT03', 0),
-(19, 'Your student with student No<strong> 214000120</strong> has complained about a course unit taught by lecturer<strong> Innocent Ndibatya</strong>', '2017-05-01 21:02:46', NULL, 'SCIT01', 0),
-(20, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-05-01 21:16:29', 214000120, NULL, 0),
-(21, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught in academic year <strong>2014-2015</strong>', '2017-05-01 21:16:35', NULL, 'SCIT02', 0),
-(22, 'Your student with student No<strong> 214000120</strong> has complained about a course unit taught by lecturer<strong> Flavia Namagembe</strong>', '2017-05-01 21:16:41', NULL, 'SCIT01', 0),
-(23, 'Your complaint to lecturer<strong> Henry Sserugunda</strong> has been received. Thanks, response is soon coming.', '2017-05-02 15:41:16', 214000120, NULL, 0),
-(24, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught in academic year <strong>2015-2016</strong>', '2017-05-02 15:41:27', NULL, 'SCIT05', 1),
-(25, 'Your student with student No<strong> 214000120</strong> has complained about a course unit taught by lecturer<strong> Henry Sserugunda</strong>', '2017-05-02 15:41:42', NULL, 'SCIT01', 0),
-(26, 'Your complaint to lecturer<strong> Henry Sserugunda</strong> has been received. Thanks, response is soon coming.', '2017-06-09 12:27:45', 214000120, NULL, 0),
-(27, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught in academic year <strong>2014-2015</strong>', '2017-06-09 12:27:46', NULL, 'SCIT05', 1),
-(28, 'Your student with student No<strong> 214000120</strong> has complained about a course unit taught by lecturer<strong> Henry Sserugunda</strong>', '2017-06-09 12:27:46', NULL, 'SCIT01', 0),
-(29, 'Your lecturer<strong> Innocent Ndibatya</strong> has commented on your complaint please check it out.', '2017-06-12 13:04:25', 214000120, NULL, 0),
-(30, 'Your lecturer<strong> Innocent Ndibatya</strong> has commented on your complaint please check it out.', '2017-06-12 13:09:52', 214000120, NULL, 0),
-(31, 'You have commented on a complaint from student with a Reg No <strong> 14/U/375</strong>', '2017-06-12 13:10:15', NULL, 'SCIT03', 0),
-(32, 'Lecturer <strong> Innocent Ndibatya</strong> has commented on a complaint from a student with a Reg No of <strong> 14/U/375</strong>', '2017-06-12 13:10:46', NULL, 'SCIT01', 0),
-(33, 'Your lecturer<strong> Innocent Ndibatya</strong> has commented on your complaint please check it out.', '2017-06-12 13:12:18', 214000120, NULL, 0),
-(34, 'You have commented on a complaint from student with a Reg No <strong> 14/U/375</strong>', '2017-06-12 13:12:25', NULL, 'SCIT03', 0),
-(35, 'Lecturer <strong> Innocent Ndibatya</strong> has commented on a complaint from a student with a Reg No of <strong> 14/U/375</strong>', '2017-06-12 13:12:32', NULL, 'SCIT01', 0),
-(36, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-06-15 15:49:02', 214000120, NULL, 0),
-(37, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught in academic year <strong>2016-2017</strong>', '2017-06-15 15:49:10', NULL, 'SCIT02', 0),
-(38, 'Your student with student No<strong> 214000120</strong> has complained about a course unit taught by lecturer<strong> Flavia Namagembe</strong>', '2017-06-15 15:49:17', NULL, 'SCIT01', 0),
-(39, 'Your complaint to lecturer<strong> Henry Sserugunda</strong> has been received. Thanks, response is soon coming.', '2017-06-27 15:52:18', 214000120, NULL, 0),
-(40, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught in academic year <strong>2014-2015</strong>', '2017-06-27 15:52:30', NULL, 'SCIT05', 1),
-(41, 'Your student with student No<strong> 214000120</strong> has complained about a course unit taught by lecturer<strong> Henry Sserugunda</strong>', '2017-06-27 15:52:37', NULL, 'SCIT01', 0),
-(42, 'Your lecturer<strong> Innocent Ndibatya</strong> has given you 90 as the Exam markon your complaint please check it out.', '2017-06-28 13:00:28', 214000120, NULL, 0),
-(43, 'You have given you 90 as the Exam mark on a complaint from student with a Reg No <strong> 14/U/375</strong>', '2017-06-28 13:00:43', NULL, 'SCIT03', 0),
-(45, 'Your complaint to lecturer<strong> Henry Sserugunda</strong> has been received. Thanks, response is soon coming.', '2017-06-28 15:47:40', 214018802, NULL, 1),
-(46, 'A student with student No<strong> 214018802</strong> has complained about a course unit you taught in academic year <strong>2014-2015</strong>', '2017-06-28 15:47:49', NULL, 'SCIT05', 1),
-(47, 'Your student with student No<strong> 214018802</strong> has complained about a course unit taught by lecturer<strong> Henry Sserugunda</strong>', '2017-06-28 15:47:57', NULL, 'SCIT01', 0),
-(48, 'Your lecturer<strong> Henry Sserugunda</strong> has given you 96 as the coursework Markon your complaint please check it out.', '2017-06-28 15:52:33', 214018802, NULL, 1),
-(49, 'You have given you 96 as the coursework Mark on a complaint from student with a Reg No <strong> 14/u/11308/PS</strong>', '2017-06-28 15:52:48', NULL, 'SCIT05', 1),
-(51, 'The head of Department <strong>  </strong> has approved the Mark 96% you were given by Lecturer <strong></strong>', '2017-06-28 16:44:16', 214018802, NULL, 1),
-(52, 'The mark you gave student with <strong> 14/u/11308/PS </strong> has been approved by the Head of Department', '2017-06-28 16:44:25', NULL, 'SCIT01', 0),
-(53, 'You have just approved <strong>96% of student with Reg No 14/u/11308/PS  which Lecturer  had given', '2017-06-28 16:44:25', NULL, 'SCIT01', 0),
-(54, 'The head of Department <strong>  </strong> has approved the Mark 90% you were given by Lecturer <strong></strong>', '2017-06-28 16:46:20', 214000120, NULL, 0),
-(55, 'The mark you gave student with <strong> 14/U/375 </strong> has been approved by the Head of Department', '2017-06-28 16:46:30', NULL, 'SCIT01', 0),
-(56, 'You have just approved <strong>90% of student with Reg No 14/U/375  which Lecturer  had given', '2017-06-28 16:46:30', NULL, 'SCIT01', 0),
-(57, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-06-30 22:25:43', 214000120, NULL, 0),
-(58, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught in academic year <strong>2016-2017</strong>', '2017-06-30 22:25:43', NULL, 'SCIT02', 0),
-(59, 'Your student with student No<strong> 214000120</strong> has complained about a course unit taught by lecturer<strong> Flavia Namagembe</strong>', '2017-06-30 22:25:43', NULL, 'SCIT01', 0),
-(60, 'Your lecturer<strong> Innocent Ndibatya</strong> has given you  as the on your complaint please check it out.', '2017-07-02 15:44:51', 214000120, NULL, 0),
-(61, 'You have just given you % as the  on a complaint from student with a Reg No <strong> 14/U/375</strong>', '2017-07-02 15:44:51', NULL, 'SCIT03', 0),
-(62, 'Lecturer <strong> Innocent Ndibatya</strong> has given you  as the  on a complaint from a student with a Reg No of <strong> 14/U/375</strong>', '2017-07-02 15:44:51', NULL, 'SCIT01', 0),
-(63, 'Your complaint to lecturer<strong> Haleem Chongomweru</strong> has been received. Thanks, response is soon coming.', '2017-07-02 19:55:08', 214000120, NULL, 0),
-(64, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught in academic year <strong>2014-2015</strong>', '2017-07-02 19:55:08', NULL, 'SCIT19', 1),
-(65, 'Your student with student No<strong> 214000120</strong> has complained about a course unit taught by lecturer<strong> Haleem Chongomweru</strong>', '2017-07-02 19:55:08', NULL, 'SCIT01', 0),
-(66, 'The head of Department <strong>  </strong> has approved the Mark 96% you were given by Lecturer <strong></strong>', '2017-07-02 23:14:09', 214018802, NULL, 1),
-(67, 'The mark 96%  you approved for student with Reg no<strong> 14/u/11308/PS </strong> has reflected on the Results, done by the Academic Registrar Edith Naluyimba', '2017-07-02 23:14:10', NULL, 'SCIT01', 0),
-(68, 'You have just confirmed that update of the Results system with mark<strong> 96% for student with Reg No 14/u/11308/PS  was done', '2017-07-02 23:14:10', NULL, 'SCIT06', 0),
-(69, 'Your complaint to lecturer<strong> Fiona Tulinayo</strong> has been received. Thanks, response is soon coming.', '2017-07-03 12:54:52', 214024647, NULL, 0),
-(70, 'A student with student No<strong> 214024647</strong> has complained about a course unit you taught in academic year <strong>2015-2016</strong>', '2017-07-03 12:55:00', NULL, 'SCIT09', 0),
-(71, 'Your student with student No<strong> 214024647</strong> has complained about a course unit taught by lecturer<strong> Fiona Tulinayo</strong>', '2017-07-03 12:55:11', NULL, 'SCIT01', 0),
-(72, 'Your complaint to lecturer<strong> Fiona Tulinayo</strong> has been received. Thanks, response is soon coming.', '2017-07-03 12:56:40', 214024647, NULL, 0),
-(73, 'A student with student No<strong> 214024647</strong> has complained about a course unit you taught in academic year <strong>2015-2016</strong>', '2017-07-03 12:56:52', NULL, 'SCIT09', 0),
-(74, 'Your student with student No<strong> 214024647</strong> has complained about a course unit taught by lecturer<strong> Fiona Tulinayo</strong>', '2017-07-03 12:57:00', NULL, 'SCIT01', 0),
-(75, 'Your complaint to lecturer<strong> Haleem Chongomweru</strong> has been received. Thanks, response is soon coming.', '2017-07-03 12:59:21', 214024647, NULL, 0),
-(76, 'A student with student No<strong> 214024647</strong> has complained about a course unit you taught in academic year <strong>2015-2016</strong>', '2017-07-03 12:59:38', NULL, 'SCIT19', 1),
-(77, 'Your student with student No<strong> 214024647</strong> has complained about a course unit taught by lecturer<strong> Haleem Chongomweru</strong>', '2017-07-03 12:59:44', NULL, 'SCIT01', 0),
-(78, 'Your complaint to lecturer<strong> Haleem Chongomweru</strong> has been received. Thanks, response is soon coming.', '2017-07-03 12:59:44', 214024647, NULL, 0),
-(79, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-07-03 14:33:38', 214024647, NULL, 0),
-(80, 'A student with student No<strong> 214024647</strong> has complained about a course unit you taught in academic year <strong>2015-2016</strong>', '2017-07-03 14:33:46', NULL, 'SCIT02', 0),
-(81, 'Your student with student No<strong> 214024647</strong> has complained about a course unit taught by lecturer<strong> Flavia Namagembe</strong>', '2017-07-03 14:33:55', NULL, 'SCIT01', 0),
-(82, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-07-03 14:33:55', 214024647, NULL, 0),
-(83, 'A student with student No<strong> 214024647</strong> has complained about a course unit you taught in academic year <strong>2015-2016</strong>', '2017-07-03 14:34:01', NULL, 'SCIT02', 0),
-(84, 'Your lecturer<strong> Innocent Ndibatya</strong> has given you 98 as the examon your complaint please check it out.', '2017-07-03 15:32:35', 214000120, NULL, 0),
-(85, 'You have just given you 98% as the exam on a complaint from student with a Reg No <strong> 14/U/375</strong>', '2017-07-03 15:32:43', NULL, 'SCIT03', 1),
-(86, 'Lecturer <strong> Innocent Ndibatya</strong> has given 98 as the exam on a complaint from a student with a Reg No of <strong> 14/U/375</strong>', '2017-07-03 15:32:50', NULL, 'SCIT01', 0),
-(87, 'Your complaint to lecturer<strong> Fiona Tulinayo</strong> has been received. Thanks, response is soon coming.', '2017-07-03 15:51:54', 214024647, NULL, 0),
-(88, 'A student with student No<strong> 214024647</strong> has complained about a course unit you taught in academic year <strong>2016-2017</strong>', '2017-07-03 15:52:00', NULL, 'SCIT09', 0),
-(89, 'Your student with student No<strong> 214024647</strong> has complained about a course unit taught by lecturer<strong> Fiona Tulinayo</strong>', '2017-07-03 15:52:07', NULL, 'SCIT01', 0),
-(90, 'Lecturer Fiona Tulinayo has given You coursework as the coursework and examework as the examework for your complaint', '2017-07-03 16:05:43', 214024647, NULL, 0),
-(91, 'You have given coursework as the coursework and examework as the examework on complaint made by student with Reg No <strong>14/U/24679</strong> ', '2017-07-03 16:06:00', NULL, 'SCIT09', 1),
-(92, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-07-03 17:04:44', 214000120, NULL, 0),
-(93, 'A student with student No<strong> 214000120</strong> has complained about a course unit you taught in academic year <strong>2016-2017</strong>', '2017-07-03 17:04:51', NULL, 'SCIT02', 0),
-(94, 'Your student with student No<strong> 214000120</strong> has complained about a course unit taught by lecturer<strong> Flavia Namagembe</strong>', '2017-07-03 17:04:57', NULL, 'SCIT01', 0),
-(95, 'Your lecturer<strong> Flavia Namagembe</strong> has commented on your complaint that, i didn''t see your test paper', '2017-07-03 17:25:13', 214000120, NULL, 0),
-(96, 'You have just commented on a complaint from student with a Reg No <strong> 14/U/375</strong> that,i didn''t see your test paper', '2017-07-03 17:25:20', NULL, 'SCIT02', 0),
-(97, 'Lecturer <strong> Flavia Namagembe</strong> has commented on a complaint from a student with a Reg No of <strong> 14/U/375</strong> as a response', '2017-07-03 17:25:26', NULL, 'SCIT01', 0),
-(98, 'Lecturer Flavia Namagembe has given You  as the coursework and 86 as the exam for your complaint', '2017-07-03 17:29:56', 214000120, NULL, 0),
-(99, 'You have given  as the coursework and 86 as the exam on complaint made by student with Reg No <strong>14/U/375</strong> ', '2017-07-03 17:30:05', NULL, 'SCIT02', 1),
-(100, 'Lecturer <strong> Flavia Namagembe</strong> has given  as the coursework and 86 on a complaint from a student with a Reg No of <strong> 14/U/375</strong>', '2017-07-03 17:30:12', NULL, 'SCIT01', 0),
-(101, 'The head of Department <strong> Evelyn Kahiigi</strong> has approved the Mark 80% you were given by Lecturer <strong>Fiona Tulinayo</strong>', '2017-07-03 17:35:27', 214024647, NULL, 0),
-(102, 'The mark you gave student with <strong> 14/U/24679 </strong> has been approved by the Head of Department', '2017-07-03 17:35:39', NULL, 'SCIT09', 1),
-(103, 'You have just approved <strong>80% of student with Reg No 14/U/24679  which Lecturer Fiona Tulinayo had given', '2017-07-03 17:35:39', NULL, 'SCIT01', 0),
-(104, 'The head of Department <strong> Evelyn Kahiigi</strong> has approved the Mark 76% you were given by Lecturer <strong>Flavia Namagembe</strong>', '2017-07-03 17:37:29', 214000120, NULL, 0),
-(105, 'The mark you gave student with <strong> 14/U/375 </strong> has been approved by the Head of Department', '2017-07-03 17:37:38', NULL, 'SCIT02', 1),
-(106, 'You have just approved <strong>76% of student with Reg No 14/U/375  which Lecturer Flavia Namagembe had given', '2017-07-03 17:37:38', NULL, 'SCIT01', 0),
-(107, 'The head of Department <strong> Evelyn Kahiigi</strong> has approved the Mark 76% you were given by Lecturer <strong>Flavia Namagembe</strong>', '2017-07-03 17:43:22', 214000120, NULL, 0),
-(108, 'The mark you gave student with <strong> 14/U/375 </strong> has been approved by the Head of Department', '2017-07-03 17:43:22', NULL, 'SCIT02', 1),
-(109, 'You have just approved <strong>76% of student with Reg No 14/U/375  which Lecturer Flavia Namagembe had given', '2017-07-03 17:43:22', NULL, 'SCIT01', 0),
-(110, 'The Academic Registrar Edith Naluyimba of your college has confirmed that your mark 98% given to resolve your complaint on course unit BIS 2107 ', '2017-07-03 17:47:22', 214024647, NULL, 0),
-(111, 'The mark 98%  you approved for student with Reg no<strong> 14/U/24679 </strong> has reflected on the Results, done by the Academic Registrar Edith Naluyimba', '2017-07-03 17:47:22', NULL, 'SCIT01', 0),
-(112, 'You have just confirmed that update of the Results system with mark<strong> 98% for student with Reg No 14/U/24679  was done', '2017-07-03 17:47:22', NULL, 'SCIT06', 0),
-(113, 'The Academic Registrar Edith Naluyimba of your college has confirmed that your mark 98% given to resolve your complaint on course unit BIS 2107 ', '2017-07-03 17:48:57', 214024647, NULL, 0),
-(114, 'The mark 98%  you approved for student with Reg no<strong> 14/U/24679 </strong> has reflected on the Results, done by the Academic Registrar Edith Naluyimba', '2017-07-03 17:49:04', NULL, 'SCIT01', 0),
-(115, 'You have just confirmed that update of the Results system with mark<strong> 98% for student with Reg No 14/U/24679  was done', '2017-07-03 17:49:04', NULL, 'SCIT06', 0),
-(116, 'The Academic Registrar Edith Naluyimba of your college has confirmed that your mark 86% given to resolve your complaint on course unit BIT 1106 ', '2017-07-03 17:50:39', 214000120, NULL, 0),
-(117, 'The mark 86%  you approved for student with Reg no<strong> 14/U/375 </strong> has reflected on the Results, done by the Academic Registrar Edith Naluyimba', '2017-07-03 17:50:44', NULL, 'SCIT01', 0),
-(118, 'You have just confirmed that update of the Results system with mark<strong> 86% for student with Reg No 14/U/375  was done', '2017-07-03 17:50:44', NULL, 'SCIT06', 0),
-(119, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-07-03 19:13:28', 214024647, NULL, 0),
-(120, 'A student with student No<strong> 214024647</strong> has complained about a course unit you taught in academic year <strong>2016-2017</strong>', '2017-07-03 19:13:29', NULL, 'SCIT02', 1),
-(121, 'Your student with student No<strong> 214024647</strong> has complained about a course unit taught by lecturer<strong> Flavia Namagembe</strong>', '2017-07-03 19:13:29', NULL, 'SCIT01', 0),
-(122, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-07-03 19:15:25', 214024647, NULL, 0),
-(123, 'A student with student No<strong> 214024647</strong> has complained about a course unit you taught in academic year <strong>2016-2017</strong>', '2017-07-03 19:15:31', NULL, 'SCIT02', 1),
-(124, 'Your student with student No<strong> 214024647</strong> has complained about a course unit taught by lecturer<strong> Flavia Namagembe</strong>', '2017-07-03 19:15:39', NULL, 'SCIT01', 0),
-(125, 'Your lecturer<strong> Flavia Namagembe</strong> has commented on your complaint that, have not seen your coursework 1 marks', '2017-07-03 19:19:09', 214024647, NULL, 0),
-(126, 'You have just commented on a complaint from student with a Reg No <strong> 14/U/24679</strong> that,have not seen your coursework 1 marks', '2017-07-03 19:19:15', NULL, 'SCIT02', 1),
-(127, 'Lecturer <strong> Flavia Namagembe</strong> has commented on a complaint from a student with a Reg No of <strong> 14/U/24679</strong> as a response', '2017-07-03 19:19:20', NULL, 'SCIT01', 0),
-(128, 'Lecturer Flavia Namagembe has given You 80 as the coursework and 97 as the exam for your complaint', '2017-07-03 19:20:52', 214024647, NULL, 0),
-(129, 'You have given 80 as the coursework and 97 as the exam on complaint made by student with Reg No <strong>14/U/24679</strong> ', '2017-07-03 19:20:58', NULL, 'SCIT02', 1),
-(130, 'Lecturer <strong> Flavia Namagembe</strong> has given 80 as the coursework and 97 on a complaint from a student with a Reg No of <strong> 14/U/24679</strong>', '2017-07-03 19:21:04', NULL, 'SCIT01', 0),
-(131, 'The head of Department <strong> Evelyn Kahiigi</strong> has approved the Mark 80% you were given by Lecturer <strong>Flavia Namagembe</strong>', '2017-07-03 19:22:11', 214024647, NULL, 0),
-(132, 'The mark you gave student with <strong> 14/U/24679 </strong> has been approved by the Head of Department', '2017-07-03 19:22:15', NULL, 'SCIT02', 1),
-(133, 'You have just approved <strong>80% of student with Reg No 14/U/24679  which Lecturer Flavia Namagembe had given', '2017-07-03 19:22:15', NULL, 'SCIT01', 0),
-(134, 'The Academic Registrar Edith Naluyimba of your college has confirmed that your mark 97% given to resolve your complaint on course unit BIT 2302 ', '2017-07-03 19:23:12', 214024647, NULL, 0),
-(135, 'The mark 97%  you approved for student with Reg no<strong> 14/U/24679 </strong> has reflected on the Results, done by the Academic Registrar Edith Naluyimba', '2017-07-03 19:23:18', NULL, 'SCIT01', 0),
-(136, 'You have just confirmed that update of the Results system with mark<strong> 97% for student with Reg No 14/U/24679  was done', '2017-07-03 19:23:18', NULL, 'SCIT06', 0),
-(137, 'Your complaint to lecturer<strong> Haleem Chongomweru</strong> has been received. Thanks, response is soon coming.', '2017-07-04 03:30:45', 214018802, NULL, 1),
-(138, 'A student with student No<strong> 214018802</strong> has complained about a course unit you taught in academic year <strong>2014-2015</strong>', '2017-07-04 03:30:45', NULL, 'SCIT19', 1),
-(139, 'Your student with student No<strong> 214018802</strong> has complained about a course unit taught by lecturer<strong> Haleem Chongomweru</strong>', '2017-07-04 03:30:45', NULL, 'SCIT01', 0),
-(140, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-07-04 03:39:07', 214018802, NULL, 1),
-(141, 'A student with student No<strong> 214018802</strong> has complained about a course unit you taught in academic year <strong>2015-2016</strong>', '2017-07-04 03:39:07', NULL, 'SCIT02', 1),
-(142, 'Your student with student No<strong> 214018802</strong> has complained about a course unit taught by lecturer<strong> Flavia Namagembe</strong>', '2017-07-04 03:39:07', NULL, 'SCIT01', 0),
-(143, 'Your lecturer<strong> Flavia Namagembe</strong> has given you 90 as the courseworkon your complaint please check it out.', '2017-07-04 03:51:52', 214018802, NULL, 1),
-(144, 'You have just given you 90% as the coursework on a complaint from student with a Reg No <strong> 14/u/11308/PS</strong>', '2017-07-04 03:51:52', NULL, 'SCIT02', 1),
-(145, 'Lecturer <strong> Flavia Namagembe</strong> has given 90 as the coursework on a complaint from a student with a Reg No of <strong> 14/u/11308/PS</strong>', '2017-07-04 03:51:52', NULL, 'SCIT01', 0),
-(146, 'Your complaint to lecturer<strong> Emmanuel Mugejjera</strong> has been received. Thanks, response is soon coming.', '2017-07-04 09:06:45', 214018802, NULL, 1),
-(147, 'A student with student No<strong> 214018802</strong> has complained about a course unit you taught in academic year <strong>2014-2015</strong>', '2017-07-04 09:06:57', NULL, 'SCIT35', 1),
-(148, 'Your student with student No<strong> 214018802</strong> has complained about a course unit taught by lecturer<strong> Emmanuel Mugejjera</strong>', '2017-07-04 09:07:10', NULL, 'SCIT01', 0),
-(149, 'Your lecturer<strong> Emmanuel Mugejjera</strong> has given you 80 as the courseworkon your complaint please check it out.', '2017-07-04 09:10:15', 214018802, NULL, 1),
-(150, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-07-04 10:16:33', 214018802, NULL, 1),
-(151, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-07-04 10:17:24', 214018802, NULL, 1),
-(152, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-07-04 10:20:26', 214020655, NULL, 1),
-(153, 'Your complaint to lecturer<strong> Flavia Namagembe</strong> has been received. Thanks, response is soon coming.', '2017-07-04 10:22:09', 214020655, NULL, 1),
-(154, 'Lecturer Flavia Namagembe has given You 79 as the coursework and 97 as the exam for your complaint', '2017-07-04 10:36:04', 214018802, NULL, 1),
-(155, 'The head of Department <strong> Evelyn Kahiigi</strong> has approved the Mark 90% you were given by Lecturer <strong>Flavia Namagembe</strong>', '2017-07-05 16:26:02', 214018802, NULL, 1),
-(156, 'The mark you gave student with <strong> 14/u/11308/PS </strong> has been approved by the Head of Department', '2017-07-05 16:26:21', NULL, 'SCIT02', 1),
-(157, 'You have just approved <strong>90% of student with Reg No 14/u/11308/PS  which Lecturer Flavia Namagembe had given', '2017-07-05 16:26:21', NULL, 'SCIT01', 0);
+  `flag` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -551,115 +305,13 @@ INSERT INTO `notification` (`notificationID`, `content`, `notificationDate`, `st
 -- Table structure for table `offering`
 --
 
-CREATE TABLE IF NOT EXISTS `offering` (
-  `offerID` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `offering` (
+  `offerID` int(10) NOT NULL,
   `studentNo` int(9) NOT NULL,
   `course_id` int(10) NOT NULL,
   `academicYear` varchar(10) NOT NULL,
-  `program` varchar(10) NOT NULL,
-  PRIMARY KEY (`offerID`),
-  KEY `course_id` (`course_id`),
-  KEY `studentNo` (`studentNo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=94 ;
-
---
--- Dumping data for table `offering`
---
-
-INSERT INTO `offering` (`offerID`, `studentNo`, `course_id`, `academicYear`, `program`) VALUES
-(1, 214000120, 3, '2014-2015', 'Day'),
-(2, 214000120, 31, '2014-2015', 'Day'),
-(3, 214000120, 10, '2014-2015', 'Day'),
-(4, 214000120, 32, '2014-2015', 'Day'),
-(5, 214000120, 11, '2014-2015', 'Day'),
-(6, 214000120, 1, '2015-2016', 'Day'),
-(7, 214000120, 6, '2015-2016', 'Day'),
-(8, 214000120, 2, '2015-2016', 'Day'),
-(9, 214000120, 29, '2015-2016', 'Day'),
-(10, 214000120, 14, '2015-2016', 'Day'),
-(11, 214000120, 7, '2016-2017', 'Day'),
-(12, 214000120, 24, '2016-2017', 'Day'),
-(13, 214000120, 22, '2016-2017', 'Day'),
-(14, 214000120, 36, '2016-2017', 'Day'),
-(15, 214000120, 23, '2016-2017', 'Day'),
-(16, 214018802, 11, '2014-2015', 'Day'),
-(17, 214018802, 31, '2014-2015', 'Day'),
-(18, 214024647, 11, '2014-2015', 'Day'),
-(19, 214024647, 31, '2014-2015', 'Day'),
-(20, 214024647, 3, '2014-2015', 'Day'),
-(21, 214024647, 10, '2014-2015', 'Day'),
-(22, 214024647, 32, '2014-2015', 'Day'),
-(23, 214024647, 12, '2014-2015', 'Day'),
-(24, 214024647, 4, '2014-2015', 'Day'),
-(25, 214024647, 5, '2014-2015', 'Day'),
-(26, 214024647, 33, '2014-2015', 'Day'),
-(27, 214024647, 37, '2014-2015', 'Day'),
-(28, 214024647, 34, '2014-2015', 'Day'),
-(29, 214024647, 35, '2014-2015', 'Day'),
-(30, 214024647, 1, '2015-2016', 'Day'),
-(31, 214024647, 6, '2015-2016', 'Day'),
-(32, 214024647, 15, '2015-2016', 'Day'),
-(33, 214024647, 14, '2015-2016', 'Day'),
-(34, 214024647, 29, '2015-2016', 'Day'),
-(35, 214024647, 16, '2015-2016', 'Day'),
-(36, 214024647, 18, '2015-2016', 'Day'),
-(37, 214024647, 19, '2015-2016', 'Day'),
-(38, 214024647, 20, '2015-2016', 'Day'),
-(39, 214024647, 21, '2015-2016', 'Day'),
-(40, 214024647, 7, '2016-2017', 'Day'),
-(41, 214024647, 24, '2016-2017', 'Day'),
-(42, 214024647, 36, '2016-2017', 'Day'),
-(43, 214020655, 11, '2014-2015', 'Day'),
-(44, 214020655, 31, '2014-2015', 'Day'),
-(45, 214020655, 3, '2014-2015', 'Day'),
-(46, 214020655, 10, '2014-2015', 'Day'),
-(47, 214020655, 32, '2014-2015', 'Day'),
-(48, 214020655, 12, '2014-2015', 'Day'),
-(49, 214020655, 4, '2014-2015', 'Day'),
-(50, 214020655, 5, '2014-2015', 'Day'),
-(51, 214020655, 33, '2014-2015', 'Day'),
-(52, 214020655, 37, '2014-2015', 'Day'),
-(53, 214020655, 34, '2014-2015', 'Day'),
-(54, 214020655, 35, '2014-2015', 'Day'),
-(55, 214020655, 1, '2015-2016', 'Day'),
-(56, 214020655, 6, '2015-2016', 'Day'),
-(57, 214020655, 15, '2015-2016', 'Day'),
-(58, 214020655, 14, '2015-2016', 'Day'),
-(59, 214020655, 29, '2015-2016', 'Day'),
-(60, 214020655, 20, '2015-2016', 'Day'),
-(61, 214020655, 19, '2015-2016', 'Day'),
-(62, 214020655, 18, '2015-2016', 'Day'),
-(63, 214020655, 21, '2015-2016', 'Day'),
-(64, 214020655, 7, '2016-2017', 'Day'),
-(65, 214020655, 24, '2016-2017', 'Day'),
-(66, 214020655, 36, '2016-2017', 'Day'),
-(67, 214018802, 3, '2014-2015', 'Day'),
-(68, 214018802, 10, '2014-2015', 'Day'),
-(69, 214018802, 32, '2014-2015', 'Day'),
-(70, 214018802, 12, '2014-2015', 'Day'),
-(71, 214018802, 4, '2014-2015', 'Day'),
-(72, 214018802, 5, '2014-2015', 'Day'),
-(73, 214018802, 33, '2014-2015', 'Day'),
-(74, 214018802, 37, '2014-2015', 'Day'),
-(75, 214018802, 34, '2014-2015', 'Day'),
-(76, 214018802, 35, '2014-2015', 'Day'),
-(77, 214018802, 1, '2015-2016', 'Day'),
-(78, 214018802, 6, '2015-2016', 'Day'),
-(79, 214018802, 13, '2015-2016', 'Day'),
-(80, 214018802, 14, '2015-2016', 'Day'),
-(81, 214018802, 29, '2015-2016', 'Day'),
-(82, 214018802, 18, '2015-2016', 'Day'),
-(83, 214018802, 19, '2015-2016', 'Day'),
-(84, 214018802, 20, '2015-2016', 'Day'),
-(85, 214018802, 21, '2015-2016', 'Day'),
-(86, 214018802, 7, '2016-2017', 'Day'),
-(87, 214018802, 24, '2016-2017', 'Day'),
-(88, 214018802, 36, '2016-2017', 'Day'),
-(89, 214000120, 12, '2014-2015', 'Day'),
-(90, 214000120, 33, '2014-2015', 'Day'),
-(91, 214000120, 4, '2014-2015', 'Day'),
-(92, 214000120, 37, '2014-2015', 'Day'),
-(93, 214000120, 5, '2014-2015', 'Day');
+  `program` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -667,7 +319,7 @@ INSERT INTO `offering` (`offerID`, `studentNo`, `course_id`, `academicYear`, `pr
 -- Table structure for table `staff`
 --
 
-CREATE TABLE IF NOT EXISTS `staff` (
+CREATE TABLE `staff` (
   `staffId` varchar(12) NOT NULL,
   `fName` varchar(20) NOT NULL,
   `lName` varchar(25) NOT NULL,
@@ -678,10 +330,7 @@ CREATE TABLE IF NOT EXISTS `staff` (
   `email` varchar(45) NOT NULL,
   `staffType` varchar(30) NOT NULL,
   `dept_ID` int(6) NOT NULL,
-  `userID` int(10) NOT NULL,
-  PRIMARY KEY (`staffId`),
-  KEY `staff_ibfk_1` (`userID`),
-  KEY `dept_ID` (`dept_ID`)
+  `userID` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -731,8 +380,8 @@ INSERT INTO `staff` (`staffId`, `fName`, `lName`, `DOB`, `gender`, `nationality`
 -- Table structure for table `staff_logs`
 --
 
-CREATE TABLE IF NOT EXISTS `staff_logs` (
-  `log_id` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `staff_logs` (
+  `log_id` int(100) NOT NULL,
   `mark_id` int(10) NOT NULL,
   `mark_name` varchar(25) NOT NULL,
   `new_mark` int(3) NOT NULL,
@@ -741,23 +390,8 @@ CREATE TABLE IF NOT EXISTS `staff_logs` (
   `operation_type` varchar(20) NOT NULL,
   `operation_date` datetime NOT NULL,
   `complaint_no` int(10) NOT NULL,
-  `staff_id` varchar(12) NOT NULL,
-  PRIMARY KEY (`log_id`),
-  KEY `mark_id` (`mark_id`),
-  KEY `staff_id` (`staff_id`),
-  KEY `complaint_no` (`complaint_no`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `staff_logs`
---
-
-INSERT INTO `staff_logs` (`log_id`, `mark_id`, `mark_name`, `new_mark`, `old_complaint_status`, `new_complaint_status`, `operation_type`, `operation_date`, `complaint_no`, `staff_id`) VALUES
-(1, 12, 'coursework', 80, '', '', 'Giving a Mark', '2017-07-04 09:10:03', 47, 'SCIT35'),
-(2, 13, 'coursework', 79, '', '', 'Giving a Mark', '2017-07-04 10:35:41', 49, 'SCIT02'),
-(3, 14, 'exam', 97, '', '', 'Giving a Mark', '2017-07-04 10:35:41', 49, 'SCIT02'),
-(4, 4, 'Exam', 98, 'pending', 'approved', 'Mark approval', '2017-07-11 08:20:49', 4, 'SCIT01'),
-(5, 4, 'Exam', 98, 'approved', 'pending', 'Mark approval', '2017-07-11 08:21:24', 4, 'SCIT01');
+  `staff_id` varchar(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -765,7 +399,7 @@ INSERT INTO `staff_logs` (`log_id`, `mark_id`, `mark_name`, `new_mark`, `old_com
 -- Table structure for table `student`
 --
 
-CREATE TABLE IF NOT EXISTS `student` (
+CREATE TABLE `student` (
   `studentNo` int(9) NOT NULL,
   `regNo` varchar(25) NOT NULL,
   `fName` varchar(20) NOT NULL,
@@ -778,11 +412,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   `contact` varchar(15) NOT NULL,
   `email` varchar(45) NOT NULL,
   `course_id` int(10) NOT NULL,
-  `userID` int(10) NOT NULL,
-  PRIMARY KEY (`studentNo`),
-  UNIQUE KEY `regNo` (`regNo`),
-  KEY `userID` (`userID`),
-  KEY `course_id` (`course_id`)
+  `userID` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -791,7 +421,7 @@ CREATE TABLE IF NOT EXISTS `student` (
 
 INSERT INTO `student` (`studentNo`, `regNo`, `fName`, `lName`, `program`, `gender`, `DOB`, `yearOfEntry`, `nationality`, `contact`, `email`, `course_id`, `userID`) VALUES
 (21201672, '14/U/877', ' Jane ', 'MBABAZI ', 'Day', 'F', '0000-00-00', '2014-2015', 'Uganda', '+257701562348', 'jane@yahoo.com', 3, 1139),
-(211004594, '14/U/7142/PS', 'Phillip ', 'ARYANYIJUKA  ', 'Day', 'M', '1992-05-23', '2014-2015', 'Uganda', '+256771235987', 'philip@gamail.com', 3, 1064),
+(211004594, '16/KUD/DICSIT/027/HP', 'Benard', 'Libo', 'Day', 'M', '1992-05-23', '2014-2015', 'Uganda', '+256771235987', 'philip@gamail.com', 3, 1064),
 (211012908, '14/U/11843/EVE', ' Peter Faaro ', 'MANGENI ', 'Evenning', 'M', '1995-09-15', '2014-2015', 'Uganda', '+256789362548', 'mangeni@gmail.com', 3, 1136),
 (211013934, '14/U/11855/EVE', '  Wilson ', 'MATATA', 'Evenning', 'M', '0000-00-00', '2014-2015', 'Uganda', '+256789145623', 'wilson@yahoo.com', 3, 1137),
 (211025823, '11/U/24033/PS', ' SHADIAH KASULE', 'NANTABA', 'Day', 'F', '1995-09-15', '2011-2012', 'Uganda', '+256703020951', 'kasuleshadiah@gmail.com', 1, 107),
@@ -1000,52 +630,13 @@ INSERT INTO `student` (`studentNo`, `regNo`, `fName`, `lName`, `program`, `gende
 -- Table structure for table `teaching`
 --
 
-CREATE TABLE IF NOT EXISTS `teaching` (
-  `teachingID` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `teaching` (
+  `teachingID` int(10) NOT NULL,
   `staffID` varchar(12) NOT NULL,
   `course_id` int(10) NOT NULL,
   `academicYear` varchar(10) NOT NULL,
-  `program` varchar(10) NOT NULL,
-  PRIMARY KEY (`teachingID`),
-  KEY `teaching_ibfk_1` (`staffID`),
-  KEY `course_id` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
-
---
--- Dumping data for table `teaching`
---
-
-INSERT INTO `teaching` (`teachingID`, `staffID`, `course_id`, `academicYear`, `program`) VALUES
-(3, 'SCIT19', 11, '2014-2015', 'Both'),
-(4, 'SCIT05', 31, '2014-2015', 'Both'),
-(5, 'SCIT35', 12, '2014-2015', 'Both'),
-(6, 'SCIT03', 1, '2015-2016', 'Both'),
-(8, 'SCIT02', 4, '2016-2017', 'Both'),
-(11, 'SCIT09', 7, '2016-2017', 'Both'),
-(14, 'SCIT02', 24, '2016-2017', 'Day'),
-(15, 'SCIT02', 36, '2016-2017', 'Both'),
-(16, 'SCIT10', 3, '2014-2015', 'Both'),
-(17, 'SCIT19', 10, '2014-2015', 'Both'),
-(18, 'SCIT35', 32, '2014-2015', 'Both'),
-(20, 'SCIT02', 4, '2014-2015', 'Both'),
-(21, 'SCIT04', 5, '2014-2015', 'Both'),
-(22, 'SCIT03', 33, '2014-2015', 'Both'),
-(23, 'SCIT05', 37, '2014-2015', 'Both'),
-(24, 'SCIT20', 34, '2014-2015', 'Both'),
-(25, 'SCIT12', 35, '2014-2015', 'Both'),
-(27, 'SCIT15', 2, '2015-2016', 'Both'),
-(28, 'SCIT15', 6, '2015-2016', 'Both'),
-(29, 'SCIT08', 13, '2015-2016', 'Both'),
-(30, 'SCIT09', 15, '2015-2016', 'Both'),
-(31, 'SCIT14', 14, '2015-2016', 'Both'),
-(32, 'SCIT03', 29, '2015-2016', 'Both'),
-(34, 'SCIT08', 16, '2015-2016', 'Both'),
-(36, 'SCIT19', 18, '2015-2016', 'Both'),
-(37, 'SCIT20', 19, '2015-2016', 'Both'),
-(38, 'SCIT11', 20, '2015-2016', 'Both'),
-(41, 'SCIT02', 21, '2015-2016', 'Both'),
-(42, 'SCIT17', 22, '2016-2017', 'Both'),
-(43, 'SCIT12', 23, '2016-2017', 'Both');
+  `program` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1053,25 +644,23 @@ INSERT INTO `teaching` (`teachingID`, `staffID`, `course_id`, `academicYear`, `p
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `userID` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `userID` int(10) NOT NULL,
   `username` varchar(45) NOT NULL,
   `password` varchar(32) NOT NULL,
   `profilepic` varchar(100) NOT NULL,
   `usertype` varchar(20) NOT NULL,
   `last_logOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `secret_code` varchar(32) NOT NULL,
-  PRIMARY KEY (`userID`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1208 ;
+  `secret_code` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`userID`, `username`, `password`, `profilepic`, `usertype`, `last_logOn`, `secret_code`) VALUES
-(1, '14/U/375', '0f2dfab78133702e6014b73de5bf8eb1', '../images/IMG_20160908_004123.jpg', 'student', '2017-07-14 11:30:15', 'b59c67bf196a4758191e42f76670ceba'),
-(4, 'evelynkahiigi@cit.mak.ac.ug', 'da47166cc95b26761c7460ceb2e3a7ba', '../images/in4.jpg', 'H.O.D', '2017-07-11 17:12:16', '3b712de48137572f3849aabd5666a4e3'),
+(1, '14/U/375', '0f2dfab78133702e6014b73de5bf8eb1', '../images/IMG_20160908_004123.jpg', 'student', '2019-05-28 07:13:18', 'b59c67bf196a4758191e42f76670ceba'),
+(4, 'evelynkahiigi@cit.mak.ac.ug', 'da47166cc95b26761c7460ceb2e3a7ba', '../images/in4.jpg', 'H.O.D', '2019-05-27 04:44:17', '3b712de48137572f3849aabd5666a4e3'),
 (7, 'flashina7@gmail.com', '064d492271a60cfd5b35efd290100160', '../images/in6.jpg', 'lecturer', '2017-07-04 07:38:26', '81dc9bdb52d04dc20036dbd8313ed055'),
 (13, 'ndibatyainnocent@yahoo.com', '57bcf2a52aa67fe051519da4762f6d5f', '', 'lecturer', '2017-07-11 17:59:42', '3b712de48137572f3849aabd5666a4e3'),
 (15, 'henryserugunda@gmail.com', '54c87bea342ad07aca1009be14af69e0', '', 'lecturer', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
@@ -1079,7 +668,7 @@ INSERT INTO `users` (`userID`, `username`, `password`, `profilepic`, `usertype`,
 (35, '14/U/11308/PS', '71076474b095aa8c60029926922c851b', '../images/DSC_2180.JPG', 'student', '2017-07-05 12:42:43', 'b59c67bf196a4758191e42f76670ceba'),
 (38, '14/U/4330/PS', '721a55b5dd86849f8613cfc6ba1497c2', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
 (39, 'amuronruth@gmail.com', 'e7d0aae7f2fc6dba27ff665d22b67530', '', 'lecturer', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
-(44, 'edithnaluyimba@cis.mak.ac.ug', 'aa3ccd65909dad3b8a45e9fa5fd7dd12', '../images/IMG_20170126_163051', 'Admin', '2017-07-14 04:22:04', 'fd06b8ea02fe5b1c2496fe1700e9d16c'),
+(44, 'edithnaluyimba@cis.mak.ac.ug', 'aa3ccd65909dad3b8a45e9fa5fd7dd12', '../images/IMG_20170126_163051', 'Admin', '2018-07-05 23:59:55', 'fd06b8ea02fe5b1c2496fe1700e9d16c'),
 (45, 'josephsemwogerere@gmail.com', 'bff1efa0b147c4c1769347f7ebcce1f4', '', 'lecturer', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
 (46, 'ssemaluulupaul@yahoo.com', 'b9d2e63234d94e20e6d3cbfb378165c9', '', 'lecturer', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
 (47, 'tulinayofiona@gmail.com', '85ab26620f44ffb1c815e3446e49b34b', '', 'lecturer', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
@@ -1164,7 +753,7 @@ INSERT INTO `users` (`userID`, `username`, `password`, `profilepic`, `usertype`,
 (1061, '14/U/337', '1bb72f8c1e1ccd4a583da4c58ff5cf7b', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
 (1062, '14/X/22308/PS', 'c1672be24ede5c45df14599ac4abee0e', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
 (1063, '14/U/7058/EVE', '000cd2048c47c5089bb7608cb494859c', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
-(1064, '14/U/7142/PS', '4ee7e5b2398dd442dd83e478ce294812', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
+(1064, '16/KUD/DICSIT/027/HP', '5a2b6d3b54f2b1966f529546bae7e824', '', 'student', '2019-05-28 07:13:32', 'b59c67bf196a4758191e42f76670ceba'),
 (1065, '14/U/7262/PS', '59568972e60c48fe3b304c1d22ea23b8', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
 (1066, '14/U/7282/EVE', 'd872eb5a817e94ab4002bf7d4b80a655', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
 (1067, '14/U/23285/PS', '1172d85c8e43ed5749cb77afabeb8e5c', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba'),
@@ -1310,6 +899,181 @@ INSERT INTO `users` (`userID`, `username`, `password`, `profilepic`, `usertype`,
 (1207, '15/U/13400/PS', '8679dee338b250bb2b73bf30cf7f82dd', '', 'student', '2017-07-04 05:27:05', 'b59c67bf196a4758191e42f76670ceba');
 
 --
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`commentID`),
+  ADD KEY `complaintNo` (`complaintNo`);
+
+--
+-- Indexes for table `complaint`
+--
+ALTER TABLE `complaint`
+  ADD PRIMARY KEY (`complaintNo`),
+  ADD KEY `studentNo` (`studentNo`),
+  ADD KEY `course_id` (`course_id`),
+  ADD KEY `lecturerID` (`lecturerID`),
+  ADD KEY `hodID` (`hodID`);
+
+--
+-- Indexes for table `course`
+--
+ALTER TABLE `course`
+  ADD PRIMARY KEY (`course_id`),
+  ADD KEY `dept_id` (`dept_id`);
+
+--
+-- Indexes for table `courseunit`
+--
+ALTER TABLE `courseunit`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `dept_ID` (`dept_ID`);
+
+--
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`dept_ID`);
+
+--
+-- Indexes for table `mark`
+--
+ALTER TABLE `mark`
+  ADD PRIMARY KEY (`markID`),
+  ADD KEY `complaintNo` (`complaintNo`);
+
+--
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`notificationID`),
+  ADD KEY `notification_ibfk_1` (`studentNo`),
+  ADD KEY `notification_ibfk_2` (`staffID`);
+
+--
+-- Indexes for table `offering`
+--
+ALTER TABLE `offering`
+  ADD PRIMARY KEY (`offerID`),
+  ADD KEY `course_id` (`course_id`),
+  ADD KEY `studentNo` (`studentNo`);
+
+--
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`staffId`),
+  ADD KEY `staff_ibfk_1` (`userID`),
+  ADD KEY `dept_ID` (`dept_ID`);
+
+--
+-- Indexes for table `staff_logs`
+--
+ALTER TABLE `staff_logs`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `mark_id` (`mark_id`),
+  ADD KEY `staff_id` (`staff_id`),
+  ADD KEY `complaint_no` (`complaint_no`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`studentNo`),
+  ADD UNIQUE KEY `regNo` (`regNo`),
+  ADD KEY `userID` (`userID`),
+  ADD KEY `course_id` (`course_id`);
+
+--
+-- Indexes for table `teaching`
+--
+ALTER TABLE `teaching`
+  ADD PRIMARY KEY (`teachingID`),
+  ADD KEY `teaching_ibfk_1` (`staffID`),
+  ADD KEY `course_id` (`course_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`userID`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `commentID` int(6) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `complaint`
+--
+ALTER TABLE `complaint`
+  MODIFY `complaintNo` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `course`
+--
+ALTER TABLE `course`
+  MODIFY `course_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `courseunit`
+--
+ALTER TABLE `courseunit`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+
+--
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `dept_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `mark`
+--
+ALTER TABLE `mark`
+  MODIFY `markID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `notificationID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `offering`
+--
+ALTER TABLE `offering`
+  MODIFY `offerID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `staff_logs`
+--
+ALTER TABLE `staff_logs`
+  MODIFY `log_id` int(100) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `teaching`
+--
+ALTER TABLE `teaching`
+  MODIFY `teachingID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `userID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1208;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -1388,6 +1152,7 @@ ALTER TABLE `student`
 ALTER TABLE `teaching`
   ADD CONSTRAINT `teaching_ibfk_1` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffId`),
   ADD CONSTRAINT `teaching_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `courseunit` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

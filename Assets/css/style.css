@@ -39,7 +39,9 @@ a {
   font-weight:400;
 }
 a:hover { transition: all 200ms ease-in-out; }
-
+.border-gray{
+   border-radius: 50%;
+}
 .page-container {
   min-width: 100%;
   position: relative;

@@ -25,6 +25,7 @@
 
 	<h1 class="animated fadeInRight">RESULTS COMPLAINT MONITORING SYSTEM</h1>
 			<?php
+     // echo md5('BErnice2017'); die;
               require("login_system/dbconnection.php");
               require("login_system/core.inc.php");
               if (loggedin()) {
